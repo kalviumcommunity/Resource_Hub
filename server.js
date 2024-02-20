@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PUBLIC_PORT || 3000;
 
 app.get('/ping', (req, res) => {
-  res.send('hello');
+  res.send('Hi this is om from kalvium');
 });
 
 if (require.main === module) {
