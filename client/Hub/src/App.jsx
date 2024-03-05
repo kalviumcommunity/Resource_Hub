@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Books from './components/BookList';
-import Form from './components/RegisterForm';
+import HUB from './components/HUB';
 import './App.css';
 
 function App() {
@@ -10,9 +9,7 @@ function App() {
     <Router>
       <Routes>
 
-        <Route path="/" element={<Books />} />
-
-        <Route path="/form" element={<Form />} />
+        <Route path="/" element={<HUB />} />
       </Routes>
     </Router>
   );
