@@ -4,6 +4,8 @@ const { getConnectionStatus } = require('./db');
 
 router.use(express.json());
 
+const {Model} = require('./schema')
+
 // Error handling middleware
 router.use((err, req, res, next) => {
     console.error(err.stack);
@@ -41,5 +43,16 @@ router.put('/put', async (req, res, next) => {
 router.delete('/delete', async (req, res) => {
     res.send('Data deleted successfully');
 });
+
+router.get('/data',async(req,res)=>{
+    try{
+        const test = await Model.find({})
+        console.log(test)
+        res.send(test)
+    }
+    catch(err){
+        console.log(err)
+    }
+})
 
 module.exports = router;
