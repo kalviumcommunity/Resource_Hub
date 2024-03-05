@@ -5,7 +5,9 @@ const app_routes = require('./routes')
 
 const{startDatabase}=require('./db')
 
+const cors = require('cors')
 
+app.use(cors())
 
 app.use('/', app_routes);
 
