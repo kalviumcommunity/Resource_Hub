@@ -6,6 +6,16 @@ router.use(express.json());
 
 const {Model} = require('./schema')
 
+router.post('/post' , async(req,res) => {
+    try{
+        const info = Model.create(req.body)
+        console.log(info)
+        res.send(info)
+    }
+    catch(err){
+        console.log(err)
+    }
+})
 // Error handling middleware
 router.use((err, req, res, next) => {
     console.error(err.stack);
@@ -41,10 +51,10 @@ router.put('/put', async (req, res, next) => {
 });
 
 router.delete('/delete', async (req, res) => {
-    res.send('Data deleted successfully');
+    res.send('info deleted successfully');
 });
 
-router.get('/data',async(req,res)=>{
+router.get('/info',async(req,res)=>{
     try{
         const test = await Model.find({})
         console.log(test)

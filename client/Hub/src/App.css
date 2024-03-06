@@ -213,6 +213,7 @@ Generic layout (demo looks)
 
 body {
   margin: 0;
+  user-select: none;
   /* padding: 48px 0; */
   font-family: "Figtree", sans-serif;
   font-size: 1.2rem;
