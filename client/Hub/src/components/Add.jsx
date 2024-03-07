@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import '../components/Add.css'
-
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 
 function update() {
+
+    const navigate = useNavigate()
+
     const [image, setImage] = useState('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -23,44 +27,37 @@ function update() {
     const handleLinkChange = (e) => {
         setLink(e.target.value);
     };
-    const handleClick = () => [
-        passData()
-    ]
-
-    const passData = () => {
+    const handleClick = () => {
+        
         try {
             axios.post(" https://resource-hub-1.onrender.com/post", {
-                "name": name,
-                "source": description,  
-                "links": link,  
-                "imageLinks": image
+                "Resources": name,
+                "Links": link,  
+                "Description": description,  
+                "Img": image
             })
-            .then(response => console.log(response))
-            .catch(error => console.error(error));
+            .then(response => console.log(response.data))
+            .then(navigate("/"))
         }
         catch (err) {
             console.log(err);
         }
+    }
+
+    const passData = () => {
     };
-
-
-
-
-
-
-
 
     return (
         <div>
 
             <div className="container">
-                <form action="/action_page.php">
+                <div>
                     <div className="row">
                         <div className="col-25">
                             <label htmlFor="fname">Image</label>
                         </div>
                         <div className="col-75">
-                            <input type="text" id="fname" name="firstname" placeholder="URL" />
+                            <input onChange={handleImageChange} type="text" id="fname" name="firstname" placeholder="URL" />
                         </div>
                     </div>
                     <div className="row">
@@ -68,7 +65,7 @@ function update() {
                             <label htmlFor="lname">Name</label>
                         </div>
                         <div className="col-75">
-                            <input type="text" id="lname" name="lastname" placeholder="Site name" />
+                            <input onChange={handleNameChange} type="text" id="lname" name="lastname" placeholder="Site name" />
                         </div>
                     </div>
                     <div className="row">
@@ -76,9 +73,7 @@ function update() {
                             <label htmlFor="country">Description</label>
                         </div>
                         <div className="col-75">
-                            <input id="country" name="country" placeholder="Description">
-                                 
-                            </input>
+                            <input onChange={handleDescriptionChange} id="country" name="country" placeholder="Description"/>    
                         </div>
                     </div>
                     <div className="row">
@@ -86,15 +81,15 @@ function update() {
                             <label htmlFor="subject">Link</label>
                         </div>
                         <div className="col-75">
-                            <input id="subject" name="subject" placeholder="URL" />
+                            <input onChange={handleLinkChange} id="subject" name="subject" placeholder="URL" />
                         </div>
                     </div>
-                    <div class="row">
-                        <button onClick={handleClick} type="submit" value="Submit">
+                    <div className="row">
+                        <button onClick={handleClick}>
                             efbhiuewdbfoudjrbfvelj
-                            </button>
+                        </button>
                     </div>
-                </form>
+                </div>
             </div>
 
 
