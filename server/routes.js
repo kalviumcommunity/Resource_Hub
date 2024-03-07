@@ -40,11 +40,11 @@ router.post("/post", (req, res) => {
     res.send(req.body);
 });
 
-router.put('/put', async (req, res, next) => {
+router.post('/post', async (req, res, next) => {
     try {
-        let finalStatus = await getConnectionStatus();
-        finalStatus = "hey DB";
-        res.send(finalStatus);
+        const info = Model.create(req.body)
+        console.log(info)
+        res.send(info)
     } catch (error) {
         next(error);  
     }

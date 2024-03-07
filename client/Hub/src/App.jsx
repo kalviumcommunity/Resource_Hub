@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter ,Routes, Route } from 'react-router-dom';
 import HUB from './components/HUB';
 import './App.css';
-import Update from './components/Update'
+import Add from './components/Add'
 
 function App() {
 
@@ -13,7 +13,7 @@ function App() {
       <Routes>
 
         <Route path="/" element={<HUB />} />
-        <Route path="/om" element={<Update />} />
+        <Route path="/add" element={<Add />} />
       </Routes>
     </BrowserRouter>
     </>

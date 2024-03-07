@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../App.css";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 function HUB() {
   const [hub, setHub] = useState([]);
@@ -22,14 +23,18 @@ function HUB() {
   return (
     <div className="main-container">
       <div className="header">
-        <h2>Resource Hub</h2>
+        <h2>Resource </h2>
+        <h2 className="logo-name">Hub</h2>
         <input
           type="text"
           placeholder="🔍 Enter the book name"
           list="suggestions"
           className="search-bar"
         />
-        <button>omm</button>
+        <Link to="/add">
+        
+        < button>Add</button>
+        </Link>
         
       </div>
 

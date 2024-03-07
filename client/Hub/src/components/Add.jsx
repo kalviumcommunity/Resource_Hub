@@ -1,9 +1,51 @@
-import { useEffect, useState } from "react";
-import "../App.css";
-import "../components/Update.css"
+import React, { useState } from 'react';
+import '../components/Add.css'
 
 
 function update() {
+    const [image, setImage] = useState('');
+    const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [link, setLink] = useState('');
+
+    const handleImageChange = (e) => {
+        setImage(e.target.value);
+    };
+
+    const handleNameChange = (e) => {
+        setName(e.target.value);
+    };
+
+    const handleDescriptionChange = (e) => {
+        setDescription(e.target.value);
+    };
+
+    const handleLinkChange = (e) => {
+        setLink(e.target.value);
+    };
+    const handleClick = () => [
+        passData()
+    ]
+
+    const passData = () => {
+        try {
+            axios.post(" https://resource-hub-1.onrender.com/post", {
+                "name": name,
+                "source": description,  
+                "links": link,  
+                "imageLinks": image
+            })
+            .then(response => console.log(response))
+            .catch(error => console.error(error));
+        }
+        catch (err) {
+            console.log(err);
+        }
+    };
+
+
+
+
 
 
 
@@ -48,7 +90,9 @@ function update() {
                         </div>
                     </div>
                     <div class="row">
-                        <input type="submit" value="Submit"/>
+                        <button onClick={handleClick} type="submit" value="Submit">
+                            efbhiuewdbfoudjrbfvelj
+                            </button>
                     </div>
                 </form>
             </div>
