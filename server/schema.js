@@ -4,9 +4,6 @@ const schema = mongoose.Schema({
     Resources : String,
     Links : String,
     Description : String,
-    audioResource : String,
-    videoResource : String,
-    Duration : String,
     Img : String
 })
 

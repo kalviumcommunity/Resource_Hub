@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    /* background-color: rgb(56, 55, 55); */
   }
   .container{
     margin-left: 350px;
@@ -8,6 +9,9 @@
     height: 100%;
     width: 50%;
 
+  }
+  .logo-name{
+    color: rgb(255, 180, 49);
   }
   
   input[type=text], select, textarea {
