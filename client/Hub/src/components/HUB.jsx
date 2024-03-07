@@ -9,7 +9,7 @@ function HUB() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://resource-hub-1.onrender.com/data");
+        const response = await axios.get("https://resource-hub-1.onrender.com/info");
         console.log(response.data)
         setHub(response.data);
       } catch (err) {
