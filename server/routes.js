@@ -59,14 +59,10 @@ router.get('/info/:id', async (req, res) => {
 })
 
 router.delete('/delete/:id', async (req, res) => {
-    try {
-        const _id = req.params.id;
-        Model.findByIdAndDelete(_id);
-        res.json({message : "Succeess"})
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Error');
-    }
+    const _id = req.params.id
+    Model.findByIdAndDelete({_id:_id})
+    .then(res => res.json(res))
+    .catch(err => console.log(err))
 });
 
 router.put(`/updateUser/:id`, async (req, res) => {
