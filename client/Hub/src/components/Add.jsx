@@ -83,11 +83,11 @@ function update() {
                         <div className="col-75">
                             <input onChange={handleLinkChange} id="subject" name="subject" placeholder="URL" />
                         </div>
-                    </div>
-                    <div className="row">
-                        <button onClick={handleClick}>
-                            efbhiuewdbfoudjrbfvelj
+                        <button className='submit-button' onClick={handleClick}>
+                            Submit
                         </button>
+                    </div>
+                    <div className="row-button">
                     </div>
                 </div>
             </div>

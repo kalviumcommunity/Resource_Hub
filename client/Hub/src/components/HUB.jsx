@@ -26,7 +26,7 @@ function HUB() {
         <h2>Resource </h2>
         <h2 className="logo-name">Hub</h2>
         <input
-          type="text"
+          
           placeholder="🔍 Enter the book name"
           list="suggestions"
           className="search-bar"
@@ -65,6 +65,11 @@ function HUB() {
                       />
                     </svg>
                   </a>
+                    <td>
+                    <Link to={`/Update/${user._id}`}>Update</Link>
+                    <button>Delete</button>
+
+                    </td>
                 </div>
               </div>
             </article>
