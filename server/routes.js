@@ -50,9 +50,7 @@ router.post('/post', async (req, res, next) => {
     }
 });
 
-router.delete('/delete', async (req, res) => {
-    res.send('info deleted successfully');
-});
+ 
 router.get('/info/:id', async (req, res) => {
     const _id = req.params.id
     Model.findById({ _id })
@@ -60,7 +58,7 @@ router.get('/info/:id', async (req, res) => {
         .catch(err => console.log(err))
 })
 
-app.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
     try {
         const _id = req.params.id;
         const deletedUser = await userModel.findByIdAndDelete(_id);
