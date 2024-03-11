@@ -4,19 +4,19 @@ const { getConnectionStatus } = require('./db');
 
 router.use(express.json());
 
-const {Model} = require('./schema')
+const { Model } = require('./schema')
 
-router.post('/post' , async(req,res) => {
-    try{
+router.post('/post', async (req, res) => {
+    try {
         const info = Model.create(req.body)
         console.log(info)
         res.send(info)
     }
-    catch(err){
+    catch (err) {
         console.log(err)
     }
 })
-// Error handling middleware
+
 router.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
@@ -27,7 +27,7 @@ router.get('/', async (req, res, next) => {
         const finalStatus = await getConnectionStatus();
         res.send(finalStatus);
     } catch (error) {
-        next(error); // Pass error to the error handling middleware
+        next(error);
     }
 });
 
@@ -46,21 +46,46 @@ router.post('/post', async (req, res, next) => {
         console.log(info)
         res.send(info)
     } catch (error) {
-        next(error);  
+        next(error);
     }
 });
 
 router.delete('/delete', async (req, res) => {
     res.send('info deleted successfully');
 });
+router.get('/info/:id', async (req, res) => {
+    const _id = req.params.id
+    Model.findById({ _id })
+        .then(users => res.json(users))
+        .catch(err => console.log(err))
+})
 
-router.get('/info',async(req,res)=>{
-    try{
+router.delete('/delete/:id', async (req, res) => {
+    const _id = req.params.id
+    Model.findByIdAndDelete({ _id: _id })
+        .then(res => res.json(res))
+        .catch(err => console.log(err))
+})
+
+router.put(`/updateUser/:id`, async (req, res) => {
+    const _id = req.params.id
+    Model.findByIdAndUpdate({ _id: _id }, {
+        Resources: req.body.Resources,
+        Links: req.body.Links,
+        Description: req.body.Description,
+        Img:req.body.Img
+
+    })
+        .then(users => res.json(users))
+        .catch(err => res.json(err))
+})
+router.get('/info', async (req, res) => {
+    try {
         const test = await Model.find({})
         console.log(test)
         res.send(test)
     }
-    catch(err){
+    catch (err) {
         console.log(err)
     }
 })

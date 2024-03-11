@@ -3,18 +3,18 @@
     /* background-color: rgb(56, 55, 55); */
   }
   .container{
-    margin-left: 350px;
+    /* margin-left: 350px; */
     margin-top: 200px;
-    margin-right: 100px;
-    height: 100%;
-    width: 50%;
+    /* margin-right: 100px; */
+    height: auto;
+    /* width: 50%; */
 
   }
   .logo-name{
     color: rgb(255, 180, 49);
   }
   
-  input[type=text], select, textarea {
+  input[type=text], select, textarea,button {
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
@@ -27,8 +27,8 @@
     display: inline-block;
   }
   
-  input[type=submit] {
-    background-color: #1a94e6;
+  input[type=submit],button {
+    background-color: #18d518;
     color: white;
     padding: 12px 20px;
     border: none;
@@ -38,8 +38,8 @@
     margin-top: 10px;
   }
   
-  input[type=submit]:hover {
-    background-color: #45a049;
+  button[type=submit]:hover {
+    background-color: hsl(209, 78%, 47%);
   }
   
   .container {
@@ -59,7 +59,14 @@
     width: 75%;
     margin-top: 6px;
   }
-  
+  .submit-button:hover{
+    background-color: hsl(216, 100%, 41%);
+    transition-duration: 1s;
+
+
+ 
+  }
+
   /* Clear floats after the columns */
   .row:after {
     content: "";
