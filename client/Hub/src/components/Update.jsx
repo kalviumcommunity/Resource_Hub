@@ -8,19 +8,6 @@ function UpdateUser() {
     const [description, setDescription] = useState('');
     const [link, setLink] = useState('');
     const navigate = useNavigate()
-
-    useEffect(() => {
-        const getData = async () => {
-            const res = await axios.get(`https://resource-hub-1.onrender.com/post/list/` + id)
-            console.log("INDIVIDUAL DATA", res.data)
-            setName(res.data.name)
-            setImage(res.data.Img)
-            setDescription(res.data.Description)
-            setLink(res.data.Links)
-
-        }
-        getData()
-    }, [])
     return (
         <div>
             <div >
