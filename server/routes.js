@@ -60,7 +60,7 @@ router.get('/info/:id', async (req, res) => {
         .catch(err => console.log(err))
 })
 
-app.delete('/delete/:id', async (req, res) => {
+router.delete('/delete/:id', async (req, res) => {
     try {
         const _id = req.params.id;
         const deletedUser = await userModel.findByIdAndDelete(_id);
