@@ -29,7 +29,7 @@ function HUB() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://resource-hub-1.onrender.com/delete${id}`);
+      await axios.delete(`https://resource-hub-1.onrender.com/delete/${id}`);
       const response = await axios.get(
         "https://resource-hub-1.onrender.com/info"
       );
