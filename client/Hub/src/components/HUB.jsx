@@ -1,16 +1,23 @@
 import { useEffect, useState } from "react";
 import "../App.css";
 import axios from 'axios';
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from 'react-router-dom';
 
 function HUB() {
   const [hub, setHub] = useState([]);
+  const navigate = useNavigate();
+
+  const handleUpdateClick = (id) => {
+    // console.log("wribgg")
+    navigate(`/Update/${id}`)
+
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("https://resource-hub-1.onrender.com/info");
-        console.log(response.data)
+        // console.log(response.data)
         setHub(response.data);
       } catch (err) {
         console.error(err);
@@ -20,26 +27,35 @@ function HUB() {
     fetchData();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`https://resource-hub-1.onrender.com/delete${id}`);
+      const response = await axios.get(
+        "https://resource-hub-1.onrender.com/info"
+      );
+      setHub(response.data);
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
+  };
+
   return (
     <div className="main-container">
       <div className="header">
-        <h2>Resource </h2>
-        <h2 className="logo-name">Hub</h2>
+        <h2>Resource </h2><h2 className="logo-name">Hub</h2>
+
         <input
-          
           placeholder="🔍 Enter the book name"
           list="suggestions"
           className="search-bar"
         />
-        <Link to="/add">
-        
-        < button>Add</button>
+        <Link className="Add" to="/add">
+          <button>Add</button>
         </Link>
-        
       </div>
 
       <div className="List-books">
-        {hub.map(book => (
+        {hub.map((book) => (
           <section className="articles" key={book._id}>
             <article>
               <div className="article-wrapper">
@@ -49,7 +65,8 @@ function HUB() {
                 <div className="article-body">
                   <h2>{book.Resources}</h2>
                   <p>{book.Description}</p>
-                  <a href={book.Links} className="read-more">
+                  <div>
+                  {/* <a href={book.Links} className="read-more">
                     Link
                     <span className="sr-only">{`about ${book.Resources}`}</span>
                     <svg
@@ -64,19 +81,23 @@ function HUB() {
                         clipRule="evenodd"
                       />
                     </svg>
-                  </a>
-                    <td>
-                    <Link to={`/Update/${user._id}`}>Update</Link>
-                    <button>Delete</button>
+                  </a> */}
+                    {/* Separate Link for updating */}
+                    {/* <Link className="update" to={`/Update/${book._id}`}> */}
+                      <button className="update" onClick={()=>handleUpdateClick(book._id)}>Update</button>
+                    {/* </Link>  */}
+                  </div>
+                  <div>
+                    <button className="delete" onClick={handleDelete}>Delete</button>
+                  </div>
 
-                    </td>
                 </div>
+
               </div>
             </article>
           </section>
         ))}
       </div>
-      
     </div>
   );
 }

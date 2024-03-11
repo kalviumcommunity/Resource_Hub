@@ -60,20 +60,27 @@ router.get('/info/:id', async (req, res) => {
         .catch(err => console.log(err))
 })
 
-router.delete('/delete/:id', async (req, res) => {
-    const _id = req.params.id
-    Model.findByIdAndDelete({ _id: _id })
-        .then(res => res.json(res))
-        .catch(err => console.log(err))
-})
+app.delete('/delete/:id', async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const deletedUser = await userModel.findByIdAndDelete(_id);
+        if (!deletedUser) {
+            return res.status(404).send('User not found');
+        }
+        res.json(deletedUser);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error');
+    }
+});
 
 router.put(`/updateUser/:id`, async (req, res) => {
     const _id = req.params.id
     Model.findByIdAndUpdate({ _id: _id }, {
+        Img:req.body.Img,
         Resources: req.body.Resources,
-        Links: req.body.Links,
         Description: req.body.Description,
-        Img:req.body.Img
+        Links: req.body.Links
 
     })
         .then(users => res.json(users))

@@ -16,6 +16,7 @@ function App() {
         <Route path="/" element={<HUB />} />
         <Route path="/add" element={<Add />} />
         <Route path='/Update/:id' element={<Update />} />
+        
 
 
       </Routes>
