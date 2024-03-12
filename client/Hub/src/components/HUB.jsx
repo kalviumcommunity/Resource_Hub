@@ -42,16 +42,23 @@ function HUB() {
   return (
     <div className="main-container">
       <div className="header">
-        <h2>Resource </h2><h2 className="logo-name">Hub</h2>
+        <h2>Resource Hub</h2>
 
         <input
           placeholder="🔍 Enter the book name"
           list="suggestions"
           className="search-bar"
         />
-        <Link className="Add" to="/add">
-          <button>Add</button>
+        <Link  to="/signup">
+          <button className="Add">Sign up</button>
         </Link>
+        <Link  to="/login">
+          <button className="Add">Login</button>
+        </Link>
+        <Link  to="/add">
+          <button className="Add">Add</button>
+        </Link>
+
       </div>
 
       <div className="List-books">
