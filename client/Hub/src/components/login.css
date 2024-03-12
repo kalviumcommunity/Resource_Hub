@@ -1,0 +1,66 @@
+ .login-container{
+    box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.3);
+    height: auto;
+    /* to make the div in center */
+    width: 30%;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    margin-top: 50px;
+
+ }
+ .login{
+    text-align: center;
+
+ }
+ .signup{
+
+    width: 50%;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+ }
+ .login-input1{
+    /* width: 50%; */
+    background-color: rgb(241, 240, 240);
+    border: none;
+    /* box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.1); */
+
+    
+
+ }
+ .login-input2{
+    background-color: rgb(244, 240, 240);
+    border: none;
+    /* box-shadow: 0px 0px 10px 4px rgba(0, 0, 0, 0.1); */
+    margin-top: 1rem;
+    
+
+ }
+ .Logininput{
+    width: 80%;
+
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+
+ }
+ .forgot{
+    width: 100%;
+    margin-top: 3rem;
+    margin: auto;
+    font-size:13px;
+    padding: 10px;
+    text-align: center;
+    color: rgb(146, 143, 143);
+
+ }
+ .login-button{
+    background-color: #090979;
+    color: white;
+    font-size: 15px;
+    margin-top: 1rem;
+
+    
+ }
+ 
