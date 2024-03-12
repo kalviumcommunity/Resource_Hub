@@ -1,27 +1,55 @@
 const express = require('express');
 const router = express.Router();
 const { getConnectionStatus } = require('./db');
+const Joi = require('joi');
+const { Model } = require('./schema');
 
 router.use(express.json());
 
-const { Model } = require('./schema')
+// Define the Joi schema as per your data model
+const modelSchema = Joi.object({
+    Img: Joi.string().required(),
+    Resources: Joi.array().items(Joi.string()),  
+    Description: Joi.string().required(),
+    Links: Joi.array().items(Joi.string().uri()), 
+});
 
-router.post('/post', async (req, res) => {
+// POST route for creating new entries with Joi validation
+router.post('/post', async (req, res, next) => {
+    const { error, value } = modelSchema.validate(req.body);
+    if (error) {
+        return res.status(400).send(error.details[0].message);
+    }
     try {
-        const info = Model.create(req.body)
-        console.log(info)
-        res.send(info)
+        const info = await Model.create(value);  
+        res.send(info);
+    } catch (error) {
+        next(error);
     }
-    catch (err) {
-        console.log(err)
-    }
-})
+});
 
+// PUT route for updating entries by ID, with Joi validation
+router.put('/updateUser/:id', async (req, res) => {
+    const _id = req.params.id;
+    const { error, value } = modelSchema.validate(req.body);
+    if (error) {
+        return res.status(400).send(error.details[0].message);
+    }
+    try {
+        const updatedUser = await Model.findByIdAndUpdate(_id, value, { new: true });
+        res.json(updatedUser);
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// Middleware for handling errors
 router.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
 });
 
+// GET route for testing connection status
 router.get('/', async (req, res, next) => {
     try {
         const finalStatus = await getConnectionStatus();
@@ -31,61 +59,44 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+// Simple ping test route
 router.get("/ping", (req, res) => {
     res.send('pong');
 });
 
-router.post("/post", (req, res) => {
-    console.log(req.body);
-    res.send(req.body);
-});
-
-router.post('/post', async (req, res, next) => {
+// GET route to fetch an entry by ID
+router.get('/info/:id', async (req, res) => {
+    const _id = req.params.id;
     try {
-        const info = Model.create(req.body)
-        console.log(info)
-        res.send(info)
-    } catch (error) {
-        next(error);
+        const user = await Model.findById(_id);
+        res.json(user);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Error fetching user data" });
     }
 });
 
- 
-router.get('/info/:id', async (req, res) => {
-    const _id = req.params.id
-    Model.findById({ _id })
-        .then(users => res.json(users))
-        .catch(err => console.log(err))
-})
-
+// DELETE route to remove an entry by ID
 router.delete('/delete/:id', async (req, res) => {
-    const _id = req.params.id
-    Model.findByIdAndDelete({_id:_id})
-    .then(res => res.json(res))
-    .catch(err => console.log(err))
+    const _id = req.params.id;
+    try {
+        const deletedUser = await Model.findByIdAndDelete(_id);
+        res.json({ message: "User successfully deleted", user: deletedUser });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Error deleting user data" });
+    }
 });
 
-router.put(`/updateUser/:id`, async (req, res) => {
-    const _id = req.params.id
-    Model.findByIdAndUpdate({ _id: _id }, {
-        Img:req.body.Img,
-        Resources: req.body.Resources,
-        Description: req.body.Description,
-        Links: req.body.Links
-
-    })
-        .then(users => res.json(users))
-        .catch(err => res.json(err))
-})
+// GET route to list all entries
 router.get('/info', async (req, res) => {
     try {
-        const test = await Model.find({})
-        console.log(test)
-        res.send(test)
+        const users = await Model.find({});
+        res.json(users);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Error fetching users data" });
     }
-    catch (err) {
-        console.log(err)
-    }
-})
+});
 
 module.exports = router;
