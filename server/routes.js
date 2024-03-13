@@ -11,9 +11,9 @@ router.use(express.json());
 // Define the Joi schema as per your data model
 const modelSchema = Joi.object({
     Img: Joi.string().required(),
-    Resources: Joi.array().items(Joi.string()),  
+    Resources: Joi.string().required(),  
     Description: Joi.string().required(),
-    Links: Joi.array().items(Joi.string().uri()), 
+    Links: Joi.string().required() 
 });
 
 // POST route for creating new entries with Joi validation
@@ -38,7 +38,7 @@ router.put('/updateUser/:id', async (req, res) => {
         return res.status(400).send(error.details[0].message);
     }
     try {
-        const updatedUser = await Model.findByIdAndUpdate(_id, req.body, { new: true });
+        const updatedUser = await Model.findByIdAndUpdate({_id:_id}, value);
         res.json(updatedUser);
     } catch (err) {
         res.status(500).json(err);
