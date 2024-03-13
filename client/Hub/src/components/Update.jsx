@@ -26,18 +26,33 @@ function UpdateUser() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const userData = {
+            Img: image,
+            Resources: name,
+            Description: description,
+            Links: link,
+        };
+
+        console.log('Sending PUT request with data:', userData);
+
         try {
-            await axios.put(`https://resource-hub-1.onrender.com/updateUser/${id}`, {
-                Img: image,
-                Resources: name,
-                Description: description,
-                Link: link,
-            });
-            navigate('/'); // Adjust the redirect path as needed
+            const response = await axios.put(`https://resource-hub-1.onrender.com/updateUser/${id}`, userData);
+
+            console.log('Response:', response.data);
+
+            if (response.status >= 200 && response.status < 300) {
+                navigate('/');
+            } else {
+                console.error(`Unexpected response status: ${response.status}`);
+            }
         } catch (error) {
-            console.error(error);
+            console.error('Error submitting data:', error);
         }
     };
+
+
+
 
     return (
         <div className="update-container">
@@ -49,7 +64,7 @@ function UpdateUser() {
                 Name:< input className="update-input2" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
 
 
-                Description:< input className="update-input3" id="description" name="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Enter your Description" />
+                Description:<input className="update-input3" id="description" name="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Enter your Description" />
 
 
                 Link:< input className="update-input4" id="link" name="link" value={link} onChange={(e) => setLink(e.target.value)} placeholder="URL" />
