@@ -38,7 +38,7 @@ router.put('/updateUser/:id', async (req, res) => {
         return res.status(400).send(error.details[0].message);
     }
     try {
-        const updatedUser = await Model.findByIdAndUpdate(_id, value, { new: true });
+        const updatedUser = await Model.findByIdAndUpdate(_id, req.body, { new: true });
         res.json(updatedUser);
     } catch (err) {
         res.status(500).json(err);

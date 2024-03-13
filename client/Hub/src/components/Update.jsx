@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import './Update.css'
 
 function UpdateUser() {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    // Initialize state with empty strings to ensure inputs are controlled
+    // Initialize state with empty strings to ensure  input className="update-input"s are controlled
     const [image, setImage] = useState('');
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
@@ -39,21 +40,21 @@ function UpdateUser() {
     };
 
     return (
-        <div>
+        <div className="update-container">
             <form onSubmit={handleSubmit}>
-                <label htmlFor="image">Image</label>
-                <input type="text" id="image" name="image" value={image} onChange={(e) => setImage(e.target.value)} placeholder="Image URL" />
+                <h1 className='up'>Update</h1>
+                Image URL:< input className="update-input1" id="image" name="image" value={image} onChange={(e) => setImage(e.target.value)} placeholder="Image URL" />
 
-                <label htmlFor="name">Name</label>
-                <input type="text" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
 
-                <label htmlFor="description">Description</label>
-                <input type="text" id="description" name="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Enter your Description" />
+                Name:< input className="update-input2" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Name" />
 
-                <label htmlFor="link">Link</label>
-                <input type="text" id="link" name="link" value={link} onChange={(e) => setLink(e.target.value)} placeholder="URL" />
 
-                <input type="submit" value="Submit" />
+                Description:< input className="update-input3" id="description" name="description" value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Enter your Description" />
+
+
+                Link:< input className="update-input4" id="link" name="link" value={link} onChange={(e) => setLink(e.target.value)} placeholder="URL" />
+
+                < button className="update-button" value="Submit">Submit</button>
             </form>
         </div>
     );
