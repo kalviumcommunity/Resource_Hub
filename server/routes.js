@@ -16,7 +16,8 @@ const modelSchema = Joi.object({
     Img: Joi.string().required(),
     Resources: Joi.string().required(),  
     Description: Joi.string().required(),
-    Links: Joi.string().required() 
+    Links: Joi.string().required(), 
+    created_by: Joi.string().required()
 });
 
 // POST route for creating new entries with Joi validation
