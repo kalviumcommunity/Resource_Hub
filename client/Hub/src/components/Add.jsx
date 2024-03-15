@@ -11,6 +11,7 @@ function update() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [link, setLink] = useState('');
+    const created_by = sessionStorage.getItem('username')
 
     const handleImageChange = (e) => {
         setImage(e.target.value);
@@ -34,7 +35,8 @@ function update() {
                 "Resources": name,
                 "Links": link,  
                 "Description": description,  
-                "Img": image
+                "Img": image,
+                "created_by":created_by
             })
             .then(response => console.log(response.data))
             .then(navigate("/"))
@@ -43,6 +45,7 @@ function update() {
             console.log(err);
         }
     }
+
 
     const passData = () => {
     };

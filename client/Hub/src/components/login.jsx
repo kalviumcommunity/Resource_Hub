@@ -36,6 +36,7 @@ const Login = () => {
         setCookie('username', username, 365);
         setCookie('password', password, 365);
         sessionStorage.setItem('login', true);
+        sessionStorage.setItem('username', username);
         navigate("/");
       } else {
         setLoginMessage('Invalid Credentials');
