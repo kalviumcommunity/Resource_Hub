@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 function HUB() {
   const [hub, setHub] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [selectedUser, setSelectedUser] = useState("All"); // State to store selected user
+  const [uniqueUsers, setUniqueUsers] = useState(["All"]); // State to store unique users
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -13,6 +15,10 @@ function HUB() {
       try {
         const response = await axios.get("https://resource-hub-1.onrender.com/info");
         setHub(response.data);
+
+        // Extract unique users from the response
+        const users = ["All", ...new Set(response.data.map((item) => item.created_by))];
+        setUniqueUsers(users);
       } catch (err) {
         console.error(err);
       }
@@ -42,11 +48,16 @@ function HUB() {
     setIsLoggedIn(false);
   };
 
+  const filteredHubByUser = hub.filter(
+    (item) => selectedUser === "All" || item.created_by === selectedUser
+  );
+
   return (
     <div className="main-container">
       <div className="header">
         <h2>Resource Hub</h2>
         <input placeholder="🔍 Enter the book name" list="suggestions" className="search-bar" />
+        
         {!isLoggedIn ? (
           <>
             <Link to="/signup">
@@ -65,9 +76,26 @@ function HUB() {
           </>
         )}
       </div>
+
+      <div className="searchArea">
+      {isLoggedIn && (
+          <select className="dropdown"
+            value={selectedUser}
+            onChange={(e) => setSelectedUser(e.target.value)}
+          >
+            {uniqueUsers.map((user) => (
+              <option key={user} value={user}>
+                {user}
+              </option>
+            ))}
+          </select>
+        )}
+
+      
+      </div>
       
       <div className="List-books">
-        {hub.map((book) => (
+        {filteredHubByUser.map((book) => (
           <section className="articles" key={book._id}>
             <article>
               <div className="article-wrapper">

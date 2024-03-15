@@ -12,6 +12,7 @@ function UpdateUser() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [link, setLink] = useState('');
+    const [created_by, setcreated_by] = useState(sessionStorage.getItem("username"));
 
     useEffect(() => {
         // Fetch the current item's data and update the state
@@ -32,6 +33,7 @@ function UpdateUser() {
             Resources: name,
             Description: description,
             Links: link,
+            created_by:created_by
         };
 
         console.log('Sending PUT request with data:', userData);
