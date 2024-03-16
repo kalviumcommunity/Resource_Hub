@@ -6,5 +6,5 @@ Discover key web development tools and projects in this list, open-source projec
 
 *Website-link* - https://resource-hub-gtem.onrender.com/pi
 
-*vercel-deploy link* - https://hub-omjadhav1910s-projects.vercel.app/
+*vercel-deploy link* - [https://hub-omjadhav1910s-projects.vercel.app/](https://hub-indol.vercel.app/)https://hub-indol.vercel.app/
 
