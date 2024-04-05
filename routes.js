@@ -4,7 +4,7 @@ const { getConnectionStatus } = require('./db');
 
 router.use(express.json());
 
-// Error handling middleware
+
 router.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something broke!');
@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
         const finalStatus = await getConnectionStatus();
         res.send(finalStatus);
     } catch (error) {
-        next(error); // Pass error to the error handling middleware
+        next(error);  
     }
 });
 
