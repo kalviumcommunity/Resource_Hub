@@ -90,8 +90,6 @@ function HUB() {
             ))}
           </select>
         )}
-
-      
       </div>
       
       <div className="List-books">
