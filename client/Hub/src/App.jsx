@@ -4,6 +4,8 @@ import HUB from './components/HUB';
 import './App.css';
 import Add from './components/Add'
 import Update from './components/Update';
+import Login from './components/login';
+import Signup from './components/signup';
 
 function App() {
 
@@ -16,6 +18,9 @@ function App() {
         <Route path="/" element={<HUB />} />
         <Route path="/add" element={<Add />} />
         <Route path='/Update/:id' element={<Update />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={< Signup/>} />
+        
 
 
       </Routes>

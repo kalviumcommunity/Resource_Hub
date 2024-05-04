@@ -11,6 +11,7 @@ function update() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [link, setLink] = useState('');
+    const created_by = sessionStorage.getItem('username')
 
     const handleImageChange = (e) => {
         setImage(e.target.value);
@@ -34,7 +35,8 @@ function update() {
                 "Resources": name,
                 "Links": link,  
                 "Description": description,  
-                "Img": image
+                "Img": image,
+                "created_by":created_by
             })
             .then(response => console.log(response.data))
             .then(navigate("/"))
@@ -44,6 +46,7 @@ function update() {
         }
     }
 
+
     const passData = () => {
     };
 
@@ -52,36 +55,29 @@ function update() {
 
             <div className="container">
                 <div>
+                    <h2 className='add-data'>Add Data</h2>
                     <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="fname">Image</label>
-                        </div>
+                         
                         <div className="col-75">
-                            <input onChange={handleImageChange} type="text" id="fname" name="firstname" placeholder="URL" />
+                           Image:<input className='input1' onChange={handleImageChange} type="text" id="img" name="firstname" placeholder="URL" />
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="lname">Name</label>
-                        </div>
+                         
                         <div className="col-75">
-                            <input onChange={handleNameChange} type="text" id="lname" name="lastname" placeholder="Site name" />
+                            Name:<input className='input2' onChange={handleNameChange} type="text" id="name" name="lastname" placeholder="Site name" />
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="country">Description</label>
-                        </div>
+                         
                         <div className="col-75">
-                            <input onChange={handleDescriptionChange} id="country" name="country" placeholder="Description"/>    
+                        Description:<input className='input3' onChange={handleDescriptionChange} id="des" name="country" placeholder="Description"/>    
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-25">
-                            <label htmlFor="subject">Link</label>
-                        </div>
+                         
                         <div className="col-75">
-                            <input onChange={handleLinkChange} id="subject" name="subject" placeholder="URL" />
+                            Links:<input className='input4' onChange={handleLinkChange} id="link" name="subject" placeholder="URL" />
                         </div>
                         <button className='submit-button' onClick={handleClick}>
                             Submit
